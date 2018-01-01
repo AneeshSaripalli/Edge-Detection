@@ -3,42 +3,50 @@ import java.awt.image.BufferedImage;
 
 public class Entry
 {
-	protected int[][] pixels;
-	protected BufferedImage img;
-	protected int imgW, imgH;
+	protected int[][] pixels; // Creates a matrix of pixels
+
+	protected BufferedImage img; // Loads the images for processing from the file system
+	protected int imgW, imgH; // Variables for the image width and height
+
 	protected String fileName;
 
-	public static long startTime;
+	public static long startTime; // Creates a variable to time the total process
 
 	public Entry(String fileName, String... operations)
 	{
-		startTime = System.currentTimeMillis();
+		startTime = System.currentTimeMillis(); // Initializes start time
 
-		BufferedImage img = ImageLoad.loadImage(fileName);
+		BufferedImage img = ImageLoad.loadImage(fileName); // Loads the image from the fileLoad command
+
+		if (img == null)
+		{
+			System.out.printf("@%f - Image not found. Exiting.\n", time());
+			return;
+		}
+
 		this.img = img;
 
 		this.fileName = fileName;
 
-		pixels = ImageLoad.getPixels(img);
-		
-		imgW = img.getWidth();
-		imgH = img.getHeight();
+		pixels = ImageLoad.getPixels(img); // Initializes pixels to the pixel array from the image
 
-		if(!operations[0].equals("Gray"))
+		imgW = img.getWidth(); // Initializes image width
+		imgH = img.getHeight(); // Initializes image height
+
+		if (!operations[0].equals("Gray"))
 		{
 			pixels = Filter.grayScale(pixels, imgW, imgH);
 		}
 
-		
 		System.out.printf("Image found and loaded - width: %d, height: %d\n", imgW, imgH);
 
-		for (int i = 1; i < operations.length; i++)
+		for (int i = 1; i < operations.length; i++) // loops through all operators in the command line input
 		{
 			String operation = operations[i];
 
 			System.out.printf("@%f - ", time());
 
-			switch (operation)
+			switch (operation) // Deals with various command line strings
 			{
 			case "Edge":
 				System.out.println("Edge Processing");
@@ -76,16 +84,16 @@ public class Entry
 			}
 		}
 
-		if (!operations[operations.length - 2].equals("Edge"))
+		if (!operations[operations.length - 2].equals("Edge")) // Edge remaps the pixel values to true RGB values, so it needs to be remapped in the case its not called
 		{
 			reMap();
 		}
 
-		apply();
-		save();
+		apply(); // Applies the new pixels to the original image
+		save(); // Saves the image to the file system
 	}
 
-	public double time()
+	public static double time() // Function to get time from starttime
 	{
 		return (System.currentTimeMillis() - startTime) / 1000.0;
 	}
@@ -105,7 +113,7 @@ public class Entry
 		return newArray;
 	}
 
-	public void reMap()
+	public void reMap() // Gets the RGB storage value based on gray values
 	{
 		for (int y = 0; y < imgH; y++)
 		{
@@ -118,16 +126,16 @@ public class Entry
 		}
 	}
 
-	public void apply()
+	public void apply() // Updates buffered image to new pixel values
 	{
 		ImageLoad.setPixels(img, pixels);
 	}
 
-	public void save()
+	public void save() // Stores file with adjusted name
 	{
 		String[] strings = fileName.split("\\.");
 		String prefix = strings[0], extension = strings[1];
-		ImageLoad.saveFile(img, prefix + "converted", extension);
+		ImageLoad.saveFile(img, prefix + "_adj", extension);
 	}
 
 	public static void main(String[] args)

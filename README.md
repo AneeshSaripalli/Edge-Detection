@@ -15,6 +15,6 @@ This application is completely command line based.
 - Edge: First Greys (if not previously specified) then runs the Sobel operator over the pixels. 
 
 ### Output
-With the input file *input.ext*, outputs a file with the name *inputconverted.png*.
+With the input file *[filename].ext*, outputs a file with the name *[filename]_adj.png*.
 
 

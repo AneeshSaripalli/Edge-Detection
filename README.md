@@ -12,9 +12,11 @@ Edge Detection uses Java to run a simple Sobel operator kernel over the pixels o
 <img src="/images/Mountains.jpg" width="800" height="500"/>
 <p><b> Edge Image </b></p>
 <img src="/images/Mountainsconverted.png" width="800" height="500"/>
+<p></p>
 ## Input
 
 ### Usage
+
 This application is completely command line based.
 
 - Go into the **src** directory

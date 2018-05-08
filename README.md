@@ -9,9 +9,9 @@ Edge Detection uses Java to run a simple Sobel operator kernel over the pixels o
 
 ## Examples
 <p><b> Input Image </b></p>
-<img src="/images/Mountains.jpg" width="800" height="500/>
+<img src="/images/Mountains.jpg" width="800" height="500"/>
 <p><b> Edge Image </b></p>
-<img src="/images/Mountainsconverted.jpg" width="800" height="500/>
+<img src="/images/Mountainsconverted.jpg" width="800" height="500"/>
 ## Input
 
 ### Usage

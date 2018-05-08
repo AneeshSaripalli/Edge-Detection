@@ -8,9 +8,9 @@ Java installation.
 Edge Detection uses Java to run a simple Sobel operator kernel over the pixels of the image after graying the image. It look for edges by checking for pixels with highest value contrast.
 
 ## Examples
-<p><b> Input Image </p></b>
+<p><b> Input Image </b></p>
 <img src="/images/Mountains.jpg" width="800" height="500/>
-<p><b> Edge Image </p></b>
+<p><b> Edge Image </b></p>
 <img src="/images/Mountainsconverted.jpg" width="800" height="500/>
 ## Input
 

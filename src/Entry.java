@@ -40,7 +40,7 @@ public class Entry
 
 		System.out.printf("Image found and loaded - width: %d, height: %d\n", imgW, imgH);
 
-		for (int i = 1; i < operations.length; i++) // loops through all operators in the command line input
+		for (int i = 1; i < operations.length - 1; i++) // loops through all operators in the command line input
 		{
 			String operation = operations[i];
 
@@ -64,6 +64,9 @@ public class Entry
 
 				pixels = Filter.applyEdgeDetection(pixels, threshold, imgW, imgH);
 				break;
+			case "-Color":
+				Filter.color = true;
+				break;
 			case "Gray":
 				System.out.println("Graying Image");
 				pixels = Filter.grayScale(pixels, imgW, imgH);
@@ -81,6 +84,8 @@ public class Entry
 				pixels = Filter.applyGeneralBlur(pixels, MatrixOpt.sharpen);
 				break;
 			default:
+				System.out.println("Command not recognized");
+				break;
 			}
 		}
 

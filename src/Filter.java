@@ -2,6 +2,7 @@ import java.awt.Color;
 
 public class Filter
 {
+	public static boolean color = false;
 
 	public static int[][] grayScale(int[][] pixels, int imgW, int imgH) // Grayscales all pixels from RBG values
 	{
@@ -62,12 +63,18 @@ public class Filter
 
 				if (hyp >= threshold) // Only draws in pixel if the contrast at the pixel is greater than the threshold
 				{
+					if (color)
+					{
+						double angle = Math.atan2(cy[y][x], cx[y][x]) * 180 / Math.PI;
 
-					double angle = Math.atan2(cy[y][x], cx[y][x]) * 180 / Math.PI;
+						int val = -(int) (((1 << 16) * angle) / 360.0) + (1 << 24);
 
-					int val = -(int) (((1 << 16) * angle) / 360.0) + (1 << 24);
-
-					combined[y][x] = val;
+						combined[y][x] = val;
+					}
+					else
+					{
+						combined[y][x] = Color.black.getRGB();
+					}
 				}
 				else // Else the pixel is white
 				{
